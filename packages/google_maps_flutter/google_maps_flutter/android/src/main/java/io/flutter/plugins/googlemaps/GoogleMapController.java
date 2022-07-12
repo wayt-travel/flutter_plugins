@@ -887,8 +887,10 @@ final class GoogleMapController
     if (mapView == null) {
       return;
     }
-    mapView.onDestroy();
-    mapView = null;
+    postFrameCallback(() -> {
+      mapView.onDestroy();
+      mapView = null;
+    });
   }
 
   public void setIndoorEnabled(boolean indoorEnabled) {
